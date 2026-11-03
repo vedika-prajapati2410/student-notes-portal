@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Notes Portal</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; color: #222; }
+    header { background: #232f3e; color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 20px; margin: 0; }
+    main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
+    h2 { margin-top: 0; font-size: 18px; }
+    input, button { padding: 10px; font-size: 14px; margin: 4px 0; }
+    input { width: 100%; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #ff9900; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    button.secondary { background: #ddd; }
+    button:hover { opacity: .85; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .row > * { flex: 1; min-width: 140px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 8px; border-bottom: 1px solid #eee; font-size: 14px; }
+    #msg { padding: 10px; border-radius: 4px; margin-bottom: 16px; display: none; }
+    #msg.ok { background: #d4edda; display: block; }
+    #msg.err { background: #f8d7da; display: block; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Student Notes Portal</h1>
+    <div id="userBox" class="hidden">
+      <span id="userEmail"></span>
+      <button class="secondary" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="msg"></div>
+
+    <section id="authSection">
+      <div class="card" id="loginCard">
+        <h2>Login</h2>
+        <input id="loginEmail" type="email" placeholder="Email">
+        <input id="loginPassword" type="password" placeholder="Password">
+        <button id="loginBtn">Login</button>
+        <button class="secondary" id="showSignup">Create account</button>
+      </div>
+
+      <div class="card hidden" id="signupCard">
+        <h2>Sign up</h2>
+        <input id="signupEmail" type="email" placeholder="Email">
+        <input id="signupPassword" type="password" placeholder="Password (min 8 chars, include a number)">
+        <button id="signupBtn">Sign up</button>
+        <button class="secondary" id="showLogin1">Back to login</button>
+      </div>
+
+      <div class="card hidden" id="confirmCard">
+        <h2>Verify email</h2>
+        <p>Enter the 6-digit code sent to your email.</p>
+        <input id="confirmCode" placeholder="Verification code">
+        <button id="confirmBtn">Verify</button>
+        <button class="secondary" id="showLogin2">Back to login</button>
+      </div>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="card">
+        <h2>Upload a note (PDF)</h2>
+        <div class="row">
+          <input id="title" placeholder="Title (e.g. DBMS Unit 1)">
+          <input id="subject" placeholder="Subject (e.g. DBMS)">
+          <input id="semester" placeholder="Semester (e.g. 5)">
+        </div>
+        <input id="file" type="file" accept="application/pdf">
+        <button id="uploadBtn">Upload</button>
+      </div>
+
+      <div class="card">
+        <h2>Browse notes</h2>
+        <div class="row">
+          <input id="search" placeholder="Search by title or subject">
+          <button id="searchBtn">Search</button>
+          <button class="secondary" id="refreshBtn">Show all</button>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Title</th><th>Subject</th><th>Sem</th><th>Uploaded by</th><th></th></tr>
+          </thead>
+          <tbody id="notesBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
